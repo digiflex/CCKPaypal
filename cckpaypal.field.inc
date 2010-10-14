@@ -25,7 +25,7 @@
 */
 function cckpaypal_field_info() {
   return array(
-    'number_integer' => array('label' => t('Paypal Field')),
+    'paypal_field' => array('label' => t('Paypal Field')),
     'number_decimal' => array('label' => 'Decimal'),
   );
 }
@@ -69,38 +69,31 @@ function cckpaypal_field_settings($op, $field) {
   switch ($op) {
     case 'form':
       $form = array();
-      $form['max_length'] = array(
+      $form['paypal_account'] = array(
         '#type' => 'textfield',
-        '#title' => t('Maximum length'),
-        '#default_value' => $field['max_length'] ? $field['max_length'] : '',
+        '#title' => t('Paypal account email'),
+        '#default_value' => $field['paypal_account'] ? $field['paypal_account'] : '',
         '#required' => FALSE,
-        '#description' => t('The maximum length of the field in characters. Leave blank for an unlimited size.'),
+        '#description' => t('This account will be used by default for this content type.'),
       );
-      $form['allowed_values'] = array(
-        '#type' => 'textarea',
-        '#title' => t('Allowed values list'),
-        '#default_value' => isset($field['allowed_values']) ? $field['allowed_values'] : '',
+      $form['paypal_ammount'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Default value'),
+        '#default_value' => isset($field['paypal_ammount']) ? $field['paypal_ammount'] : '',
         '#required' => FALSE,
         '#rows' => 10,
-        '#description' => t('The possible values this field can contain.'),
+        '#description' => t('This value will be used as default value for this field'),
       );
 
       return $form;
 
     case 'save':
-      return array('max_length', 'allowed_values');
+      return array('paypal_account', 'paypal_ammount');
 
     case 'database columns':
       $columns = array(
-        'value' => array('type' => 'varchar', 'not null' => TRUE, 'default' => "''", 'sortable' => TRUE),
-        'format' => array('type' => 'int', 'length' => 10, 'unsigned' => TRUE, 'not null' => TRUE, 'default' => 0),
+        'value' => array('type' => 'text', 'serialize' => FALSE, 'views' => TRUE),
       );
-      if ($field['max_length'] == 0 || $field['max_length'] > 255) {
-        $columns['value']['type'] = 'longtext';
-      }
-      else {
-        $columns['value']['length'] = $field['max_length'];
-      }
       return $columns;
 
     case 'filters':
@@ -164,12 +157,14 @@ function cckpaypal_content_is_empty() {
 function cckpaypal_field($op, &$node, $field, &$items, $teaser, $page) {
    switch ($op) {
     case 'view':
+    echo 'view';
       foreach ($items as $delta => $item) {
         $items[$delta]['view'] = content_format($field, $item, 'default', $node);
       }
       return theme('field', $node, $field, $items, $teaser, $page);
 
     case 'validate':
+    echo 'validate';
       $allowed_values = "ABC";// text_allowed_values($field);
 
       if (is_array($items)) {

@@ -30,7 +30,7 @@ function cckpaypal_widget_info() {
   return array(
     'text' => array(
       'label' => 'Text Field',
-      'field types' => array('text'),
+      'field types' => array('paypal_field'),
     ),
   );
 }
