@@ -1,0 +1,6 @@
+name = CCK Paypal
+description = Allows you to create paypal cck fields
+package = CCK
+dependencies[] = content
+version = 1.0
+core = 6.x

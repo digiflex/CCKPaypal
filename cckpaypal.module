@@ -1,0 +1,51 @@
+<?php
+/**
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+ 
+/**
+* @file
+* These hooks are defined by field modules, modules that define a new kind
+* of field for insertion in a content type.
+*
+* Field hooks are typically called by content.module using _content_field_invoke().
+*
+* Widget module hooks are also defined here; the two go hand-in-hand, often in
+* the same module (though they are independent).
+*
+* Widget hooks are typically called by content.module using _content_widget_invoke().
+*/
+
+/**
+* @addtogroup hooks
+* @{
+*/
+
+
+/**
+* @copyright (c) Johnny Mast
+* @version 1.0
+* @author Johnny Mast <j.mast@gmail.com>
+* @since Version 1.0
+*/
+
+function cckpaypal_init() {
+	module_load_include('inc', 'cckpaypal', 'cckpaypal.formatter');
+	module_load_include('inc', 'cckpaypal', 'cckpaypal.widget');
+	module_load_include('inc', 'cckpaypal', 'cckpaypal.field');
+}
+
+
+
