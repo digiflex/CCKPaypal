@@ -66,6 +66,12 @@ function cckpaypal_field_info() {
 *     is specified for a filter, the key of the filter will be used instead.
 */
 function cckpaypal_field_settings($op, $field) {
+/*
+echo $op.' voor '.$field;
+print '<pre>';
+print_r($field);
+print '</pre>';
+*/
   switch ($op) {
     case 'form':
       $form = array();

@@ -28,10 +28,14 @@
 */
 function cckpaypal_widget_info() {
   return array(
-    'text' => array(
-      'label' => 'Text Field',
+    'button' => array(
+      'label' => 'Free donation button',
       'field types' => array('paypal_field'),
     ),
+    'text' => array(
+      'label' => 'Donate Button',
+      'field types' => array('paypal_field'),
+     ),
   );
 }
 
